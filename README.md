@@ -1,2 +1,2 @@
-# iguru-app
+# iguru-backend
 Insurance digitized
