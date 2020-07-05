@@ -23,7 +23,7 @@ app.get('*', (req, res) =>
 );
 
 app.listen(process.env.PORT || 8080, () =>
-  console.log(`app listening on port ${process.env.PORT}!`)
+  console.log(`app listening on port ${process.env.PORT}!`),
 );
 
 export default app;
