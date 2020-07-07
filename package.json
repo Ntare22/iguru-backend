@@ -17,6 +17,8 @@
     ]
   },
   "scripts": {
+    "start": "babel-node ./dist/index.js",
+    "build": "rm -rf ./dist && babel -d ./dist ./src",
     "dev": "nodemon --exec babel-node src/index.js",
     "test": "NODE_ENV=test npm run migration && NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/polyfill --require @babel/register 'src/**/**spec.js' --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",

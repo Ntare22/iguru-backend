@@ -1,5 +1,5 @@
 import path from 'path';
-// import os from 'os';
+import os from 'os';
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -16,11 +16,11 @@ const swaggerOptions = {
     servers: [
       {
         url: 'http://localhost:8080',
-        // name: `${os.hostname()}`,
+        name: `${os.hostname()}`,
       },
       {
         url: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com`,
-        // name: `${os.hostname()}`,
+        name: `${os.hostname()}`,
       },
     ],
   },
