@@ -1,6 +1,6 @@
-import Models from '../database/models';
 import bcrypt from 'bcryptjs';
 import { v4 as uuid } from 'uuid';
+import Models from '../database/models';
 
 class userController {
   static async signUp(req, res) {

@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import { user, error_user } from './mock/user.mock';
+import { user, errorUser } from './mock/user.mock';
 import userController from '../controllers/userController';
 import userNode from './mock/user.node.moch';
 
@@ -49,7 +49,7 @@ describe('SERVER CONFIG CHECK', () => {
       .request(app)
       .post(`${prefix}/signup`)
       .send({
-        firstName: error_user.firstName,
+        firstName: errorUser.firstName,
         lastName: user.lastName,
         email: 'email@gmail.com',
         password: user.password,
@@ -57,7 +57,6 @@ describe('SERVER CONFIG CHECK', () => {
       .end((err, res) => {
         expect(res).to.have.status(422);
         expect(res.body).to.have.property('error');
-        console.log(res.body);
         expect(res.body).to.have.property('status', 422);
         expect(res.body.error).to.deep.equal([
           "Please don't use digits in your first name",
@@ -65,21 +64,20 @@ describe('SERVER CONFIG CHECK', () => {
         done();
       });
   });
-  
+
   it("should return an error message when the lastName isn't only letter", (done) => {
     chai
       .request(app)
       .post(`${prefix}/signup`)
       .send({
         firstName: user.firstName,
-        lastName: error_user.lastName,
+        lastName: errorUser.lastName,
         email: 'email@gmail.com',
         password: user.password,
       })
       .end((err, res) => {
         expect(res).to.have.status(422);
         expect(res.body).to.have.property('error');
-        console.log(res.body);
         expect(res.body).to.have.property('status', 422);
         expect(res.body.error).to.deep.equal([
           "Please don't use digits in your last name",
@@ -100,7 +98,6 @@ describe('SERVER CONFIG CHECK', () => {
       .end((err, res) => {
         expect(res).to.have.status(422);
         expect(res.body).to.have.property('error');
-        console.log(res.body);
         expect(res.body).to.have.property('status', 422);
         expect(res.body.error).to.deep.equal(['Please provide a first name']);
         done();
@@ -119,7 +116,6 @@ describe('SERVER CONFIG CHECK', () => {
       .end((err, res) => {
         expect(res).to.have.status(422);
         expect(res.body).to.have.property('error');
-        console.log(res.body);
         expect(res.body).to.have.property('status', 422);
         expect(res.body.error).to.deep.equal(['Please provide a last name']);
         done();
@@ -149,7 +145,7 @@ describe('SERVER CONFIG CHECK', () => {
       .send({
         firstName: user.firstName,
         lastName: user.lastName,
-        email: error_user.email,
+        email: errorUser.email,
         password: user.password,
       })
       .end((err, res) => {

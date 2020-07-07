@@ -1,8 +1,9 @@
 import express from 'express';
 import userController from '../controllers/userController';
-const router = express.Router();
 
 import validation from '../validations/user.validation';
+
+const router = express.Router();
 
 const {
   checkFirstName,
