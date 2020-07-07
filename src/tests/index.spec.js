@@ -8,7 +8,7 @@ describe('SERVER CONFIG CHECK', () => {
   it('Should be ok', (done) => {
     chai
       .request(app)
-      .get('/')
+      .get('/api/v1')
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();

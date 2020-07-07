@@ -3,7 +3,8 @@ export default {
     queryInterface.bulkInsert('Users', [
       {
         id: 'd0a051d9-447a-49a8-aebc-7e1b031afd62',
-        names: 'Blaise Izabayo',
+        firstName: 'Blaise',
+        lastName: 'Izabayo',
         verified: true,
         email: 'blaise@gmail.com',
         password: '$2a$10$JUCGXOZMZUDUHXqRpbdoVuQ.0RuEEV26NKwnZUQJ2K1tE4FwW.nE.',
