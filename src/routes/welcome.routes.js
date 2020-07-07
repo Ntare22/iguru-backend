@@ -10,10 +10,10 @@ const router = Router();
  *   description: Welcome message for users
  *   responses:
  *     '200':
- *       description: 'Welcome to Barefoot Nomad'
+ *       description: 'Welcome to Iguru'
  */
 router.get('/', (req, res) => {
-  res.send('Welcome to Barefoot Nomad');
+  res.send('Welcome to Iguru');
 });
 
 export default router;

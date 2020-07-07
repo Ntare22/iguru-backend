@@ -5,7 +5,7 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'Barefoot Nomad',
+      title: 'Iguru',
       version: '1.0.0',
       description: 'Digitize insurance',
       license: {},

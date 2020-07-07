@@ -1,9 +1,9 @@
 import { Router } from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 import userRoutes from './user.routes';
 import swaggerOptions from '../utils/api-specifications';
-import swaggerUi from 'swagger-ui-express';
 import welcomeRoute from './welcome.routes';
-import swaggerJsdoc from 'swagger-jsdoc';
 
 const router = Router();
 const swaggerDoc = swaggerJsdoc(swaggerOptions);

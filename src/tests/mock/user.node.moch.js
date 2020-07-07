@@ -2,7 +2,7 @@ const mocks = require('node-mocks-http');
 
 const response = mocks.createResponse();
 
-const node_user = {
+const nodeUser = {
   response,
   request: {
     user: {
@@ -13,4 +13,4 @@ const node_user = {
   },
 };
 
-export default node_user;
+export default nodeUser;

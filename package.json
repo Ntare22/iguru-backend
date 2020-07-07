@@ -17,6 +17,10 @@
     ]
   },
   "scripts": {
+    "clean": "rm -rf build && mkdir build",
+    "build-src": "babel -d ./build ./src -s",
+    "build": "npm run migrateDb && npm run clean && npm run build-src",
+    "start": "node --require @babel/polyfill build/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "test": "NODE_ENV=test npm run migration && NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/polyfill --require @babel/register 'src/**/**spec.js' --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -53,7 +57,6 @@
     "mocha": "^8.0.1",
     "mocha-lcov-reporter": "^1.3.0",
     "morgan": "^1.10.0",
-    "node-mocks-http": "^1.8.1",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "sequelize-cli": "^6.2.0",
@@ -70,6 +73,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.6.0",
     "morgan": "^1.10.0",
+    "node-mocks-http": "^1.8.1",
     "nyc": "^15.1.0",
     "pg": "^8.2.1",
     "pg-hstore": "^2.3.3",
