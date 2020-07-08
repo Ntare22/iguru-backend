@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 import app from '../index';
 import { user, errorUser } from './mock/user.mock';
 import userController from '../controllers/userController';
-import userNode from './mock/user.node.moch';
+import userNode from './mock/user.node.mock';
 
 chai.use(chaiHttp);
 
