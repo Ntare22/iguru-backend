@@ -63,4 +63,40 @@ router.post(
   userController.signUp
 );
 
+/**
+ * @swagger
+ *
+ * /api/v1/auth/login:
+ *   post:
+ *     security: []
+ *     summary: Login
+ *     description: users can log into their accounts
+ *     tags:
+ *       - Users
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: integer
+ *               message:
+ *                 type: string
+ *               token: string
+ *     responses:
+ *       200:
+ *         description: login successfully
+ */
+router.post('/login', checkValidEmail, validateResult, userController.login);
+
 export default router;
