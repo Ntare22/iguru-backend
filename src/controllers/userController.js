@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import { v4 as uuid } from 'uuid';
 import Models from '../database/models';
 import { encode, decode } from '../utils/jwt-processor';
+import sendMsg from '../utils/sendEmail';
 
 class userController {
   static async signUp(req, res) {
@@ -31,6 +32,15 @@ class userController {
 
       const token = encode(data);
 
+      const emailContent = {
+        intro: 'Welcome to Iguru Insurance Platform',
+        instruction:
+          'Please confirm your email address on so that you can continue using our platform',
+        text: 'Verify',
+        signature: 'signature',
+      };
+      const link = `http://${process.env.BASE_URL}/api/v1/auth/verification?token=${token}`;
+      await sendMsg(email, firstName, emailContent, link);
       return res.status(201).json({
         status: 201,
         message: 'Your account have been created successfully',
@@ -43,15 +53,16 @@ class userController {
       });
     }
   }
+
   static async login(req, res) {
     try {
-      const { email, password } = req.body,
-        { Users } = Models,
-        registered = await Users.findOne({
-          where: {
-            email,
-          },
-        });
+      const { email, password } = req.body;
+      const { Users } = Models;
+      const registered = await Users.findOne({
+        where: {
+          email,
+        },
+      });
 
       if (!registered) {
         return res.status(401).json({
@@ -96,6 +107,31 @@ class userController {
           'This service is currently unavailable. Developers at barefoot nomad are maintaining it',
       });
     }
+  }
+
+  static async verifyUser(req, res) {
+    const { token } = req.query;
+    const { Users } = Models;
+    const registeredUser = decode(token);
+
+    const user = Users.findOne({ where: { id: registeredUser.id } });
+
+    if (user.verified === false) {
+      await Users.update(
+        {
+          verified: true,
+        },
+        { where: { id: registeredUser.id } }
+      );
+      return res.status(200).json({
+        status: 200,
+        message: `User is successfully verified`,
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'This link is no longer valid',
+    });
   }
 }
 
