@@ -28,7 +28,7 @@ class userController {
         createdAt: newUser.createdAt,
         updatedAt: newUser.updatedAt,
       };
-      
+
       const token = encode(data);
 
       return res.status(201).json({
@@ -87,8 +87,7 @@ class userController {
       return res.status(200).json({
         status: 200,
         message: 'User login successfully',
-        data,
-        token,
+        data: { token, data },
       });
     } catch (error) {
       return res.status(500).json({

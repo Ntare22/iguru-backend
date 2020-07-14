@@ -20,6 +20,33 @@ const checkLastName = [
     .isAlpha()
     .withMessage("Please don't use digits in your last name"),
 ];
+
+const checkName = [
+  body('name')
+    .not()
+    .isEmpty({ ignore_whitespace: true })
+    .withMessage('Please provide a name'),
+];
+
+const checkDescription = [
+  body('description')
+    .not()
+    .isEmpty({ ignore_whitespace: true })
+    .withMessage('Please provide a description')
+    .isLength({ min: 10 })
+    .withMessage('Your description is short'),
+];
+
+const checkValidImageUrl = [
+  body('imageUrl')
+    .not()
+    .isEmpty({ ignore_whitespace: true })
+    .withMessage('Please provide a company display picture')
+    .bail()
+    .isURL()
+    .withMessage('Please provide a valid url to the display picture'),
+];
+
 const checkValidEmail = [
   body('email')
     .not()
@@ -83,6 +110,9 @@ const validateResult = (req, res, next) => {
 export default {
   checkFirstName,
   checkLastName,
+  checkValidImageUrl,
+  checkDescription,
+  checkName,
   checkValidEmail,
   checkExistingEmail,
   checkPassword,
