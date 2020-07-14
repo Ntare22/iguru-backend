@@ -4,6 +4,7 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import userRoutes from './user.routes';
 import swaggerOptions from '../utils/api-specifications';
 import welcomeRoute from './welcome.routes';
+import companyRoutes from './company.routes';
 
 const router = Router();
 const swaggerDoc = swaggerJsdoc(swaggerOptions);
@@ -15,5 +16,6 @@ router.use('/api/v1', welcomeRoute);
 
 // set up auth routes v1
 router.use('/api/v1/auth', userRoutes);
+router.use('/api/v1/company', companyRoutes);
 
 export default router;

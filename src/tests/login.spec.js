@@ -15,7 +15,7 @@ describe('Sign in tests', () => {
         password: 'password',
       })
       .end((err, res) => {
-        expect(res.body).to.have.keys('status', 'message', 'token', 'data');
+        expect(res.body).to.have.keys('status', 'message', 'data');
         expect(res.body.status).to.be.equal(200);
         expect(res.body.message).to.be.equal('User login successfully');
         expect(res);
