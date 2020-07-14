@@ -62,6 +62,16 @@ class companiesController {
       });
     }
   }
+
+  static async getAll(req, res) {
+    const found = await Companies.findAll();
+
+    return res.status(200).json({
+      status: 200,
+      message: 'All insurance companies retrieved successfully',
+      data: found,
+    });
+  }
 }
 
 export default companiesController;

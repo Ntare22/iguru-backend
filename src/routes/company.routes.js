@@ -63,7 +63,7 @@ router.post(
  * /api/v1/company/edit?id={companyId}:
  *   patch:
  *     security: []
- *     summary: super admin add an insurance company
+ *     summary: super admin edit an insurance company
  *     description: add insurance company
  *     tags:
  *       - COMPANY
@@ -114,4 +114,34 @@ router.patch(
   companiesController.edit
 );
 
+/**
+ * @swagger
+ *
+ * /api/v1/company/get-all:
+ *   get:
+ *     security: []
+ *     summary: Get All Insurance Companies
+ *     description: show all insurance companies
+ *     tags:
+ *       - COMPANY
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: integer
+ *               message:
+ *                 type: string
+ *     parameters:
+ *       - name: x-access-token
+ *         description: Access token.
+ *         in: header
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: All insurance companies retrieved successfully
+ *  */
+router.get('/get-all', checkUser, companiesController.getAll);
 export default router;

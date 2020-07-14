@@ -23,7 +23,7 @@ const {
  *     summary: User registration
  *     description: Register new users
  *     tags:
- *       - USERS
+ *       - Users
  *     requestBody:
  *       content:
  *         application/json:
@@ -72,7 +72,7 @@ router.post(
  *     summary: Login
  *     description: users can log into their accounts
  *     tags:
- *       - USERS
+ *       - Users
  *     requestBody:
  *       content:
  *         application/json:
