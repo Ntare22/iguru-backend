@@ -9,13 +9,14 @@ import { mockToken, falseToken } from './mock/jwt.mock';
 chai.use(chaiHttp);
 
 const prefix = '/api/v1/company';
+const id = 'd0a051d9-447a-49a8-aebc-7e1b031afd98';
+const wrongId = '46e9bfdf-6d21-4fd8-8fc7-df654d615be1';
 
-describe('ADD COMPANY', () => {
-  it('should not allow adding company without login', (done) => {
+describe('DELETE COMPANY', () => {
+  it('should not allow deactivating company without login', (done) => {
     chai
       .request(app)
-      .post(`${prefix}/add`)
-      .send(company)
+      .patch(`${prefix}/delete?id=${id}`)
       .end((err, res) => {
         expect(res.body).to.have.keys('status', 'error');
         expect(res.body.status).to.be.equal(403);
@@ -28,9 +29,8 @@ describe('ADD COMPANY', () => {
   it('should not allow user with verify false without providing data', (done) => {
     chai
       .request(app)
-      .post(`${prefix}/add`)
+      .patch(`${prefix}/delete?id=${id}`)
       .set('x-access-token', `${falseToken}`)
-      .send(company)
       .end((err, res) => {
         expect(res).to.have.status(403);
         expect(res.body).to.have.property(
@@ -43,41 +43,39 @@ describe('ADD COMPANY', () => {
       });
   });
 
-  it('should not allow adding insurance company without providing data', (done) => {
+  it('should should delete insurance company which is not found', (done) => {
     chai
       .request(app)
-      .post(`${prefix}/add`)
+      .patch(`${prefix}/delete?id=${wrongId}`)
       .set('x-access-token', `${mockToken}`)
-      .send(emptyCompany)
       .end((err, res) => {
-        expect(res).to.have.status(422);
-        expect(res.body).to.have.property('error');
-        expect(res.body).to.have.property('status', 422);
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('error', 'Insurance company not found');
+        expect(res.body).to.have.property('status', 404);
         expect(res);
         done();
       });
   });
 
-  it('should should add a new insurance company', (done) => {
+  it('should should delete insurance company', (done) => {
     chai
       .request(app)
-      .post(`${prefix}/add`)
+      .patch(`${prefix}/delete?id=${id}`)
       .set('x-access-token', `${mockToken}`)
-      .send(company)
       .end((err, res) => {
-        expect(res).to.have.status(201);
+        expect(res).to.have.status(200);
         expect(res.body).to.have.property(
           'message',
-          'New insurance company was added successfully'
+          'Insurance company has been deleted'
         );
-        expect(res.body).to.have.property('status', 201);
+        expect(res.body).to.have.property('status', 200);
         expect(res);
         done();
       });
   });
 
   it('should have status 500', async () => {
-    const results = await companiesController.add(
+    const results = await companiesController.delete(
       nodeCompany.request,
       nodeCompany.response
     );

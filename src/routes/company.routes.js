@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import companiesController from '../controllers/companiesController';
 import checkUser from '../middlewares/checkUser';
-const router = Router();
 import validation from '../validations/user.validation';
+import isSuperAdmin from '../middlewares/isSuperAdmin';
+
+const router = Router();
 
 const {
   checkName,
@@ -50,6 +52,7 @@ const {
 router.post(
   '/add',
   checkUser,
+  isSuperAdmin,
   checkName,
   checkDescription,
   checkValidImageUrl,
@@ -107,6 +110,7 @@ router.post(
 router.patch(
   '/edit',
   checkUser,
+  isSuperAdmin,
   checkName,
   checkDescription,
   checkValidImageUrl,
@@ -143,7 +147,7 @@ router.patch(
  *       200:
  *         description: Insurance company has been updated
  *  */
-router.get('/get-all', checkUser, companiesController.getAll);
+router.get('/get-all', checkUser, isSuperAdmin, companiesController.getAll);
 
 /**
  * @swagger
@@ -180,7 +184,7 @@ router.get('/get-all', checkUser, companiesController.getAll);
  *       200:
  *         description: Activate insurance Companies
  *  */
-router.patch('/activate', checkUser, companiesController.activate);
+router.patch('/activate', checkUser, isSuperAdmin, companiesController.activate);
 
 /**
  * @swagger
@@ -217,6 +221,43 @@ router.patch('/activate', checkUser, companiesController.activate);
  *       200:
  *         description: deactivate insurance Companies
  *  */
-router.patch('/deactivate', checkUser, companiesController.deactivate);
+router.patch('/deactivate', checkUser, isSuperAdmin, companiesController.deactivate);
+
+/**
+ * @swagger
+ *
+ * /api/v1/company/delete?id={companyId}:
+ *   delete:
+ *     security: []
+ *     summary: delete insurance Companies
+ *     description: delete insurance Companies
+ *     tags:
+ *       - COMPANY
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: integer
+ *               message:
+ *                 type: string
+ *     parameters:
+ *       - name: x-access-token
+ *         description: Access token.
+ *         in: header
+ *         required: true
+ *         type: string
+ *       - name: companyId
+ *         description: companyId.
+ *         in: path
+ *         required: true
+ *         default: please add a company id here
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: delete insurance Companies
+ *  */
+router.patch('/delete', checkUser, isSuperAdmin, companiesController.delete);
 
 export default router;

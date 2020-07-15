@@ -20,6 +20,14 @@ export const falseUserClaims = {
   },
 };
 
+export const buyerUserClaims = {
+  data: {
+    email: 'buyer@gmail.com',
+    userId: 'd0a051d9-447a-49a8-aebc-7e1b039afd26',
+  },
+};
+
 export const mockToken = encode(claims);
 export const unRegisteredToken = encode(unRegisteredClaims);
 export const falseToken = encode(falseUserClaims);
+export const buyerUserClaimsToken = encode(buyerUserClaims);
