@@ -139,9 +139,47 @@ router.patch(
  *         in: header
  *         required: true
  *         type: string
+ *       - name: companyId
+ *         description: companyId.
+ *         in: path
+ *         required: true
+ *         default: please add a company id here
+ *         type: string
  *     responses:
  *       200:
- *         description: All insurance companies retrieved successfully
+ *         description: Insurance company has been updated
  *  */
 router.get('/get-all', checkUser, companiesController.getAll);
+
+/**
+ * @swagger
+ *
+ * /api/v1/company/activate?id={companyId}:
+ *   patch:
+ *     security: []
+ *     summary: Activate insurance Companies
+ *     description: Activate insurance Companies
+ *     tags:
+ *       - COMPANY
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: integer
+ *               message:
+ *                 type: string
+ *     parameters:
+ *       - name: x-access-token
+ *         description: Access token.
+ *         in: header
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Activate insurance Companies
+ *  */
+router.patch('/activate', checkUser, companiesController.activate);
+
 export default router;
