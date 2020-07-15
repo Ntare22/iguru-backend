@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 const prefix = '/api/v1/company';
 
-describe('COMPANY', () => {
+describe('GET COMPANY', () => {
   it('should get all insurance companies successfully', (done) => {
     chai
       .request(app)

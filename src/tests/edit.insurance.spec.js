@@ -12,7 +12,7 @@ const prefix = '/api/v1/company';
 const id = 'd0a051d9-447a-49a8-aebc-7e1b031afd62';
 const wrongId = '46e9bfdf-6d21-4fd8-8fc7-df654d615be1';
 
-describe('COMPANY', () => {
+describe('EDIT COMPANY', () => {
   it('should not allow editing company without login', (done) => {
     chai
       .request(app)
