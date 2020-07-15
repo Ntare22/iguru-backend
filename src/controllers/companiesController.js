@@ -72,6 +72,40 @@ class companiesController {
       data: found,
     });
   }
+
+  static async activate(req, res) {
+    try {
+      const {
+        query: { id },
+      } = req;
+
+      const found = await Companies.findOne({ where: { id } });
+      if (!found) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Insurance company not found',
+          data: found,
+        });
+      }
+      const newCompany = await Companies.update(
+        {
+          active: true,
+        },
+        { where: { id }, returning: true }
+      );
+
+      return res.status(200).json({
+        status: 200,
+        message: 'Insurance company has been activated',
+        data: newCompany,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: error.message,
+      });
+    }
+  }
 }
 
 export default companiesController;
