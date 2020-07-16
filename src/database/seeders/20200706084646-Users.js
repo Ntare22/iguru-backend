@@ -34,6 +34,17 @@ export default {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 'e0a051d9-447a-49a8-aebc-7e1b031afd62',
+        firstName: 'Jim',
+        lastName: 'Ntare',
+        verified: false,
+        email: 'jim@gmail.com',
+        password: 'Ntare@101',
+        role: 'customer',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
   down: (queryInterface) => queryInterface.bulkDelete('Users', null, {}),
 };

@@ -1,5 +1,6 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
+import { describe, it } from 'mocha';
 import app from '../index';
 import { user, errorUser } from './mock/user.mock';
 import userController from '../controllers/userController';
@@ -10,7 +11,7 @@ chai.use(chaiHttp);
 const prefix = '/api/v1/auth';
 
 describe('SERVER CONFIG CHECK', () => {
-  it('users should be able to create accounts', (done) => {
+  it('users should be able to create account', (done) => {
     chai
       .request(app)
       .post(`${prefix}/signup`)
@@ -21,7 +22,6 @@ describe('SERVER CONFIG CHECK', () => {
           'message',
           'Your account have been created successfully'
         );
-
         done();
       });
   });

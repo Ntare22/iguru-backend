@@ -99,4 +99,34 @@ router.post(
  */
 router.post('/login', checkValidEmail, validateResult, userController.login);
 
+/**
+ * @swagger
+ *
+ * /api/v1/auth/verification:
+ *   get:
+ *     security: []
+ *     summary: Verification
+ *     description: users can verify their emails
+ *     parameters:
+ *       - name: token
+ *         in: header
+ *         schema:
+ *           type: string
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: integer
+ *               message:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: user successfully verified
+ *       404:
+ *         description: This link is no longer valid
+ */
+router.get('/verification', userController.verifyUser);
+
 export default router;

@@ -1,4 +1,5 @@
 import chai from 'chai';
+import { describe, it } from 'mocha';
 import { claims, mockToken } from './mock/jwt.mock';
 import { encode, decode } from '../utils/jwt-processor';
 
