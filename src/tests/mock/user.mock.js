@@ -9,7 +9,7 @@ export const unverifiedUser = {
   firstName: 'Jim',
   lastName: 'Ntare',
   email: 'jim@gmail.com',
-  password: 'Ntare@101',
+  password: 'Ntare!101',
 };
 
 export const errorUser = {

@@ -162,7 +162,7 @@ router.get('/verification', userController.verifyUser);
  *       500:
  *         description: This service is currently unavailable.
  */
-router.put('/forgot/password', userController.forgotPassword);
+router.put('/forgot/password', checkValidEmail, userController.forgotPassword);
 
 /**
  * @swagger
@@ -204,6 +204,6 @@ router.put('/forgot/password', userController.forgotPassword);
  *       500:
  *         description: This service is currently unavailable.
  */
-router.put('/reset/password', userController.resetPassword);
+router.put('/reset/password', checkPassword, userController.resetPassword);
 
 export default router;

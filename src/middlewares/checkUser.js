@@ -23,6 +23,6 @@ const checkUser = async (req, res, next) => {
     });
   }
   req.user = user;
-  next();
+  return next();
 };
 export default checkUser;
