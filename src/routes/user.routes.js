@@ -129,4 +129,81 @@ router.post('/login', checkValidEmail, validateResult, userController.login);
  */
 router.get('/verification', userController.verifyUser);
 
+/**
+ * @swagger
+ *
+ * /api/v1/auth/forgot/password:
+ *   put:
+ *     security: []
+ *     summary: Forgot Pasword
+ *     description: email is able to be sent when user forgets password
+ *     tags:
+ *       - Users
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: integer
+ *               message:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Forgot email password successfully
+ *       500:
+ *         description: This service is currently unavailable.
+ */
+router.put('/forgot/password', userController.forgotPassword);
+
+/**
+ * @swagger
+ *
+ * /api/v1/auth/reset/password?email={userEmail}:
+ *   put:
+ *     security: []
+ *     summary: Reset Pasword
+ *     description: users can reset password
+ *     tags:
+ *       - Users
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password:
+ *                 type: string
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: integer
+ *               message:
+ *                 type: string
+ *     parameters:
+ *       - name: userEmail
+ *         description: userEmail.
+ *         in: path
+ *         required: true
+ *         default: please add user email here
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ *       500:
+ *         description: This service is currently unavailable.
+ */
+router.put('/reset/password', userController.resetPassword);
+
 export default router;

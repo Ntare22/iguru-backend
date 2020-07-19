@@ -1,4 +1,4 @@
-import { encode, decode } from '../utils/jwt-processor';
+import { decode } from '../utils/jwt-processor';
 import Models from '../database/models';
 
 const { Users } = Models;

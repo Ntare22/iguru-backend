@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import Models from '../database/models';
 import { encode, decode } from '../utils/jwt-processor';
 import sendMsg from '../utils/sendEmail';
+import resetPwd from '../utils/reset-pwd';
 
 class userController {
   static async signUp(req, res) {
@@ -104,7 +105,59 @@ class userController {
       return res.status(500).json({
         status: 500,
         error:
-          'This service is currently unavailable. Developers at barefoot nomad are maintaining it',
+          'This service is currently unavailable. Developers at iguru are maintaining it',
+      });
+    }
+  }
+
+  static async forgotPassword(req, res) {
+    const { email } = req.body;
+    const { Users } = Models;
+    try {
+      const user = await Users.findOne({
+        where: {
+          email,
+        },
+      });
+
+      if (!user) return res.status(404).json({ error: 'User not found' });
+      await resetPwd.forgotPwd(user);
+
+      return res.status(200).json({
+        status: 200,
+        message: 'Forgot password email has been sent, check your email',
+      });
+    } catch (err) {
+      return res.status(500).json({
+        status: 500,
+        error: 'This service is currently unavailable.',
+      });
+    }
+  }
+
+  static async resetPassword(req, res) {
+    const { email } = req.query;
+    const { password } = req.body;
+    const { Users } = Models;
+    try {
+      const user = await Users.findOne({
+        where: {
+          email,
+        },
+      });
+
+      const encryptedPassword = await bcrypt.hash(password, 10);
+
+      await resetPwd.resetPassword(user.id, encryptedPassword);
+
+      return res.status(200).json({
+        status: 200,
+        message: 'Your password has been reset',
+      });
+    } catch (err) {
+      return res.status(500).json({
+        status: 500,
+        error: 'This service is currently unavailable.',
       });
     }
   }

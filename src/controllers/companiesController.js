@@ -26,6 +26,7 @@ class companiesController {
       });
     }
   }
+
   static async edit(req, res) {
     try {
       const {
@@ -140,6 +141,7 @@ class companiesController {
       });
     }
   }
+
   static async delete(req, res) {
     try {
       const {
