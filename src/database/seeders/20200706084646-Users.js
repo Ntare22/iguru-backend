@@ -37,10 +37,10 @@ export default {
       {
         id: 'e0a051d9-447a-49a8-aebc-7e1b031afd62',
         firstName: 'Jim',
-        lastName: 'Ntare',
+        lastName: 'Customer',
         verified: false,
         email: 'jim@gmail.com',
-        password: 'Ntare@101',
+        password: 'NSdead@11231',
         role: 'customer',
         createdAt: new Date(),
         updatedAt: new Date(),
