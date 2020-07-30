@@ -7,8 +7,8 @@ dotenv.config();
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'jimnm2018@gmail.com',
-    passcode: process.env.passcode,
+    user: 'iguru.rw@gmail.com',
+    pass: `${process.env.passcode}`,
   },
 });
 
@@ -38,7 +38,7 @@ const sendMsg = (newUserEmail, firstName, content, link) => {
   });
   const msg = {
     to: newUserEmail,
-    from: 'jimnm2018@gmail.com',
+    from: 'iguru.rw@gmail.com',
     subject: 'Iguru Insurance',
     html: email,
   };
